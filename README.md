@@ -17,6 +17,8 @@ winserv.OnExit(func() {
 })
 ```
 
+Make sure to exit with os.Exit(0) or similar at the end of OnExit.
+
 ## Credits
 
 This is reworked version of
