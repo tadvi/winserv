@@ -1,4 +1,4 @@
-// Package lets run binary as Windows service.
+// Package allows running binary as Windows service.
 // Set OnExit function to execute clean up and service shutdown.
 //
 // Copyright (C) 2019 Winserv Authors. All Rights Reserved.
