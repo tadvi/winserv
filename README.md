@@ -1,7 +1,7 @@
 # winserv
 
 A minimal Windows only service stub for Go.
-It only exposes no-op OnExit function if built on Linux.
+It only exposes no-op OnExit function if built on other OS.
 
 Enable running programs as services without modifying them.
 
