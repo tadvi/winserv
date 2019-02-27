@@ -1,3 +1,11 @@
+// Package lets run binary as Windows service.
+// Set OnExit function to execute clean up and service shutdown.
+//
+// Copyright (C) 2019 Winserv Authors. All Rights Reserved.
+// Copyright (C) 2015 Daniel Theophanes. All Rights Reserved.
+
+// +build windows
+
 package winserv
 
 import (
@@ -37,12 +45,14 @@ func init() {
 	}()
 }
 
+// OnExit shutdown function.
 func OnExit(fn func()) {
 	service.Lock()
 	service.onExit = fn
 	service.Unlock()
 }
 
+// Execute gets called if binary is executed as Windows Service.
 func (runner) Execute(args []string, r <-chan svc.ChangeRequest, changes chan<- svc.Status) (bool, uint32) {
 	const cmdsAccepted = svc.AcceptStop | svc.AcceptShutdown
 	changes <- svc.Status{State: svc.StartPending}
