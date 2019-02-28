@@ -9,7 +9,6 @@
 package winserv
 
 import (
-	"io"
 	"log"
 	"os"
 	"path/filepath"
@@ -74,19 +73,15 @@ func (runner) Execute(args []string, r <-chan svc.ChangeRequest, changes chan<- 
 	return false, 0
 }
 
-type nopCloser struct{}
-
-func (nopCloser) Close() error { return nil }
-
 // RedirectLog helps with logging into file output while debugging Windows Service.
-func RedirectLog(filename string) io.Closer {
+func RedirectLog(file string) (*os.File, error) {
 	p, _ := os.Executable()
 	dir := filepath.Dir(p)
 
-	f, err := os.OpenFile(filepath.Join(dir, filename), os.O_RDWR|os.O_CREATE, 0755)
+	f, err := os.OpenFile(filepath.Join(dir, file), os.O_RDWR|os.O_CREATE, 0755)
 	if err != nil {
-		return &nopCloser{}
+		return nil, err
 	}
 	log.SetOutput(f)
-	return f
+	return f, nil
 }
