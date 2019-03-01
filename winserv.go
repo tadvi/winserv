@@ -79,10 +79,7 @@ func (runner) Execute(args []string, r <-chan svc.ChangeRequest, changes chan<- 
 
 // RedirectLog helps with logging into file output while debugging Windows Service.
 func RedirectLog(file string) (*os.File, error) {
-	p, _ := os.Executable()
-	dir := filepath.Dir(p)
-
-	f, err := os.OpenFile(filepath.Join(dir, file), os.O_RDWR|os.O_CREATE, 0755)
+	f, err := os.OpenFile(filepath.Join(file), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return nil, err
 	}
