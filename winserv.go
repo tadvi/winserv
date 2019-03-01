@@ -22,14 +22,18 @@ type runner struct {
 	onExit func()
 }
 
+// Interactive determines if calling process is running interactively.
+var Interactive bool
+
 var service runner
 
 func init() {
-	interactive, err := svc.IsAnInteractiveSession()
+	var err error
+	Interactive, err = svc.IsAnInteractiveSession()
 	if err != nil {
 		panic(err)
 	}
-	if interactive {
+	if Interactive {
 		return
 	}
 	go func() {
