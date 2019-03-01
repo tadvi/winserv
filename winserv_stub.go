@@ -5,6 +5,8 @@
 
 package winserv
 
+var Interactive = true
+
 func OnExit(fn func()) {
 
 }

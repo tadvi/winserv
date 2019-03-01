@@ -19,6 +19,8 @@ winserv.OnExit(func() {
 
 Make sure to exit with os.Exit(0) or similar at the end of OnExit.
 
+If winserv.Interactive == true we are not running as Service.
+
 ## Credits
 
 This is reworked version of

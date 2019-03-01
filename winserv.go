@@ -23,7 +23,7 @@ type runner struct {
 }
 
 // Interactive determines if calling process is running interactively.
-var Interactive bool
+var Interactive = true
 
 var service runner
 
@@ -36,6 +36,8 @@ func init() {
 	if Interactive {
 		return
 	}
+
+	// This runs only if we are running as Service.
 	go func() {
 		_ = svc.Run("", service)
 
@@ -47,7 +49,6 @@ func init() {
 		if fn != nil {
 			fn()
 		}
-		os.Exit(0)
 	}()
 }
 
